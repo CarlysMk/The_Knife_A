@@ -11,7 +11,7 @@ public class Utente {
     private String [] domicilio = new String[3];
     private String HashPsw;
     boolean boolRuolo; // TRUE per ristoratore, FALSE per utente
-    private GestioneFile file = new Gestionefile("data/Utenti.txt");
+    private GestioneFile file = new GestioneFile("data/Utenti.txt");
 
 
     public Utente(String nome, String cognome, String username, String psw, String dataNascita, String ruolo) {
