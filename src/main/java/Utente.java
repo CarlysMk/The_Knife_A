@@ -21,7 +21,7 @@ public class Utente {
 
 
 
-  /*   GestioneFile file = new GestioneFile("data/Utenti.txt.txt");
+  /*   GestioneFile file = new GestioneFile("data/Utenti.txt");
     file.scriviSuFile("Utente4", true);
     file.leggiDaFile(); */
 
