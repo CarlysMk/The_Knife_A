@@ -3,11 +3,13 @@ package com.The_Knife_A;
 import java.util.Scanner;
 
 import com.The_Knife_A.models.Utente;
+import com.The_Knife_A.utility.GestioneFile;
 
 
 public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
+        GestioneFile fileUtenti = new GestioneFile("data/Utenti.txt");
 
         int scelta;
         String nome, cognome, username, password, dataNascita, ruolo;
@@ -21,6 +23,7 @@ public class Main {
                     "\n1. Login" +
                     "\n2. Registrazione utente" +
                     "\n3. Guest" +
+                    "\n4. Test" +
                     "\n0. Esci" +
                     "\n----------------------------------" +
                     "\nScegli un'opzione: ");
@@ -31,76 +34,75 @@ public class Main {
 
                 switch (scelta) {
                     case 1:
-                        System.out.println("Login" +
-                                "\n1. Login Utente" +
-                                "\n2. Login Ristoratore" +
-                                "\n----------------------------------");
+                        System.out.println("Login\n" +
+                                "----------------------------------");
 
-                        switch (Integer.parseInt(sc.nextLine())) {
-                            case 1:
-                                System.out.println("Login Utente");
-                                System.out.println("inserisci username");
-                                username = sc.nextLine();
-                                System.out.println("inserisci password");
-                                password = sc.nextLine();
-                                break;
-                            case 2:
-                                System.out.println("Login Ristoratore");
-                                System.out.println("inserisci username");
-                                username = sc.nextLine();
-                                System.out.println("inserisci password");
-                                password = sc.nextLine();
-                                break;
-                            default:
-                                System.out.println("Opzione non valida");
-                        }
+                        System.out.println("inserisci username");
+                        username = sc.nextLine();
+                        System.out.println("inserisci password");
+                        password = sc.nextLine();
+
+                        utente = new Utente(username, password);
+
                         break;
+
                     case 2:
                         System.out.println("Registrazione nuovo utente");
-                        System.out.println("1. Registrazione Utente");
-                        System.out.println("2. Registrazione Ristoratore");
-                        switch (Integer.parseInt(sc.nextLine())) {
-                            case 1:
+
                                 System.out.println("Inserisci nome");
                                 nome = sc.nextLine();
                                 System.out.println("Inserisci cognome");
                                 cognome = sc.nextLine();
                                 System.out.println("Inserisci username");
                                 username = sc.nextLine();
+
+                                if (fileUtenti.cercaMatch(username, 2)) {
+                                    System.out.println("Username già esistente, riprova");
+                                    break;
+                                } else {
+                                    System.out.println("Username disponibile");
+
+                                }
+
                                 System.out.println("Inserisci password");
                                 password = sc.nextLine();
                                 System.out.println("Inserisci data di nascita"); // da rendere facoltativa e da controllare l'input...
                                 dataNascita = sc.nextLine();
-                                ruolo = "utente";
-                                utente = new Utente(nome, cognome, username, password, dataNascita, ruolo);
-                                System.out.println("Registrazione completata!");
-                                System.out.println("Benvenuto " + utente.getUsername());
-                                System.out.println("Effettua nuovamente il login dalla tab di inizio");
-                                break;
-                            case 2:
-                                System.out.println("Inserisci nome");
-                                nome = sc.nextLine();
-                                System.out.println("Inserisci cognome");
-                                cognome = sc.nextLine();
-                                System.out.println("Inserisci username");
-                                username = sc.nextLine();
-                                System.out.println("Inserisci password");
-                                password = sc.nextLine();
-                                System.out.println("Inserisci data di nascita"); // da rendere facoltativa
-                                dataNascita = sc.nextLine();
-                                ruolo = "ristoratore";
-                                utente = new Utente(nome, cognome, username, password, dataNascita, ruolo);
-                                System.out.println("Registrazione completata!");
-                                System.out.println("Benvenuto " + utente.getUsername());
-                                System.out.println("Effettua nuovamente il login dalla tab di inizio");
-                                break;
-                            default:
-                                throw new AssertionError();
+
+                                System.out.println("Sei un ristoratore? (1. Si / 2. No)");
+
+                                switch (Integer.parseInt(sc.nextLine())) {
+                                    case 1:
+                                        ruolo = "ristoratore";
+                                        break;
+                                    case 2:
+                                        ruolo = "utente";
+                                        break;
+                                    default:
+                                        System.out.println("Opzione non valida");
+                                        continue;
                         }
-                        break;
+
+                                utente = new Utente(nome, cognome, username, password, dataNascita, ruolo);
+                                System.out.println("Registrazione completata!");
+                                System.out.println("Benvenuto " + utente.getUsername());
+                                System.out.println("Effettua nuovamente il login dalla tab di inizio");
+                                break;
+
                     case 3:
                         System.out.println("Accesso come Guest!");
                         break;
+
+                    case 4:
+                        String [] temp = fileUtenti.getCoords("data/Ristoranti.txt", "Jungsik New York");
+                        if (temp != null) {
+                            System.out.println("Latitudine: " + temp[0]);
+                            System.out.println("Longitudine: " + temp[1]);
+                        } else {
+                            System.out.println("Coordinate non trovate");
+                        }
+                        break;
+
                     case 0:
                         System.out.println("Uscita dal programma...");
                         sc.close();
