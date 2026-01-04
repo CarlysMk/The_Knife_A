@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 import com.The_Knife_A.models.Utente;
 import com.The_Knife_A.utility.GestioneFile;
-
+import com.The_Knife_A.utility.GestioneRistoranti;   // <-- aggiunto
 
 public class Main {
     public static void main(String[] args) {
@@ -15,8 +15,6 @@ public class Main {
         String nome, cognome, username, password, dataNascita, ruolo;
         Utente utente;
 
-
-//commento con shift + option + a
         while (true) {
             System.out.println("----------------------------------" +
                     "\nBenvenuto in The Knife" +
@@ -24,6 +22,7 @@ public class Main {
                     "\n2. Registrazione utente" +
                     "\n3. Guest" +
                     "\n4. Test" +
+                    "\n5. Aggiungi ristorante" +          // <-- aggiunto nel menu
                     "\n0. Esci" +
                     "\n----------------------------------" +
                     "\nScegli un'opzione: ");
@@ -34,67 +33,62 @@ public class Main {
 
                 switch (scelta) {
                     case 1:
-                        System.out.println("Login\n" +
-                                "----------------------------------");
-
+                        System.out.println("Login\n----------------------------------");
                         System.out.println("inserisci username");
                         username = sc.nextLine();
                         System.out.println("inserisci password");
                         password = sc.nextLine();
-
                         utente = new Utente(username, password);
-
                         break;
 
                     case 2:
                         System.out.println("Registrazione nuovo utente");
 
-                                System.out.println("Inserisci nome");
-                                nome = sc.nextLine();
-                                System.out.println("Inserisci cognome");
-                                cognome = sc.nextLine();
-                                System.out.println("Inserisci username");
-                                username = sc.nextLine();
+                        System.out.println("Inserisci nome");
+                        nome = sc.nextLine();
+                        System.out.println("Inserisci cognome");
+                        cognome = sc.nextLine();
+                        System.out.println("Inserisci username");
+                        username = sc.nextLine();
 
-                                if (fileUtenti.cercaMatch(username, 2)) {
-                                    System.out.println("Username già esistente, riprova");
-                                    break;
-                                } else {
-                                    System.out.println("Username disponibile");
-
-                                }
-
-                                System.out.println("Inserisci password");
-                                password = sc.nextLine();
-                                System.out.println("Inserisci data di nascita"); // da rendere facoltativa e da controllare l'input...
-                                dataNascita = sc.nextLine();
-
-                                System.out.println("Sei un ristoratore? (1. Si / 2. No)");
-
-                                switch (Integer.parseInt(sc.nextLine())) {
-                                    case 1:
-                                        ruolo = "ristoratore";
-                                        break;
-                                    case 2:
-                                        ruolo = "utente";
-                                        break;
-                                    default:
-                                        System.out.println("Opzione non valida");
-                                        continue;
+                        if (fileUtenti.cercaMatch(username, 2)) {
+                            System.out.println("Username già esistente, riprova");
+                            break;
+                        } else {
+                            System.out.println("Username disponibile");
                         }
 
-                                utente = new Utente(nome, cognome, username, password, dataNascita, ruolo);
-                                System.out.println("Registrazione completata!");
-                                System.out.println("Benvenuto " + utente.getUsername());
-                                System.out.println("Effettua nuovamente il login dalla tab di inizio");
+                        System.out.println("Inserisci password");
+                        password = sc.nextLine();
+                        System.out.println("Inserisci data di nascita");
+                        dataNascita = sc.nextLine();
+
+                        System.out.println("Sei un ristoratore? (1. Si / 2. No)");
+
+                        switch (Integer.parseInt(sc.nextLine())) {
+                            case 1:
+                                ruolo = "ristoratore";
                                 break;
+                            case 2:
+                                ruolo = "utente";
+                                break;
+                            default:
+                                System.out.println("Opzione non valida");
+                                continue;
+                        }
+
+                        utente = new Utente(nome, cognome, username, password, dataNascita, ruolo);
+                        System.out.println("Registrazione completata!");
+                        System.out.println("Benvenuto " + utente.getUsername());
+                        System.out.println("Effettua nuovamente il login dalla tab di inizio");
+                        break;
 
                     case 3:
                         System.out.println("Accesso come Guest!");
                         break;
 
                     case 4:
-                        String [] temp = fileUtenti.getCoords("data/Ristoranti.txt", "Jungsik New York");
+                        String[] temp = fileUtenti.getCoords("data/Ristoranti.txt", "Jungsik New York");
                         if (temp != null) {
                             System.out.println("Latitudine: " + temp[0]);
                             System.out.println("Longitudine: " + temp[1]);
@@ -103,10 +97,16 @@ public class Main {
                         }
                         break;
 
+                    case 5:
+                        System.out.println("Aggiunta nuovo ristorante\n----------------------------------");
+                        GestioneRistoranti.aggiungiRistorante();   // <-- chiamata semplice
+                        break;
+
                     case 0:
                         System.out.println("Uscita dal programma...");
                         sc.close();
                         return;
+
                     default:
                         System.out.println("Opzione non valida");
                 }

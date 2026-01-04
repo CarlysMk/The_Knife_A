@@ -1,3 +1,5 @@
+package com.The_Knife_A.models;
+
 // Classe che rappresenta un ristorante
 public class Ristorante {
 
