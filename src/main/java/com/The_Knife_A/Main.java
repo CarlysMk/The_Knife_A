@@ -105,7 +105,9 @@ public class Main {
 
                     case 3:
                         System.out.println("Accesso come Guest!");
+                        com.The_Knife_A.utility.GestioneGuest.menu(sc);
                         break;
+
 
                     case 4:
                         System.out.println("Aggiunta nuovo ristorante\n----------------------------------");
