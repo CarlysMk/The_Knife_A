@@ -2,19 +2,45 @@ package com.The_Knife_A.utility;
 
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.util.Scanner;
 
-import com.The_Knife_A.models.Ristorante;   // import della classe Ristorante
+import com.The_Knife_A.models.Ristorante;
+import com.The_Knife_A.models.Utente;
 
-// Classe per la gestione dei ristoranti
 public class GestioneRistoranti {
 
-    // Metodo per aggiungere un nuovo ristorante
-    public static void aggiungiRistorante() {
+    private static final String FILE_RISTORANTI = "data/Ristoranti.csv";
+
+    // Legge l'ultimo ID e restituisce il prossimo
+    private static int getNextId() {
+        int lastId = 0;
+
+        try (BufferedReader br = new BufferedReader(new FileReader(FILE_RISTORANTI))) {
+            String line;
+
+            while ((line = br.readLine()) != null) {
+                if (line.trim().isEmpty()) continue;
+
+                String[] campi = line.split(",");
+
+                try {
+                    lastId = Integer.parseInt(campi[0]);
+                } catch (NumberFormatException ignored) {}
+            }
+        } catch (IOException e) {
+            // se il file non esiste, si parte da 1
+        }
+
+        return lastId + 1;
+    }
+
+    // Aggiunge un nuovo ristorante
+    public static void aggiungiRistorante(Utente proprietario) {
 
         Scanner scanner = new Scanner(System.in);
 
-        // Chiedo i dati del ristorante
         System.out.print("Nome: ");
         String nome = scanner.nextLine();
 
@@ -45,7 +71,8 @@ public class GestioneRistoranti {
         System.out.print("Tipo cucina: ");
         String tipoCucina = scanner.nextLine();
 
-        // Creo l'oggetto ristorante
+        int id = getNextId();
+
         Ristorante r = new Ristorante(
                 nome, nazione, citta, indirizzo,
                 latitudine, longitudine,
@@ -54,11 +81,11 @@ public class GestioneRistoranti {
                 tipoCucina
         );
 
-        // Scrivo il ristorante nel file (in append)
-        try (FileWriter fw = new FileWriter("data/Ristoranti.csv", true)) {
+        try (FileWriter fw = new FileWriter(FILE_RISTORANTI, true)) {
 
-            // Riga in formato CSV semplice
             fw.write(
+                    id + "," +
+                    proprietario.getId() + "," +
                     r.getNome() + "," +
                     r.getNazione() + "," +
                     r.getCitta() + "," +
@@ -71,7 +98,7 @@ public class GestioneRistoranti {
                     r.getTipoCucina() + "\n"
             );
 
-            System.out.println("Ristorante aggiunto correttamente.");
+            System.out.println("Ristorante aggiunto con ID: " + id);
 
         } catch (IOException e) {
             System.out.println("Errore durante il salvataggio del ristorante.");

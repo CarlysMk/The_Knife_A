@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 import com.The_Knife_A.models.Utente;
 import com.The_Knife_A.utility.GestioneFile;
-import com.The_Knife_A.utility.GestioneRistoranti;   // <-- aggiunto
+import com.The_Knife_A.utility.GestioneRistoranti;   
 
 public class Main {
     public static void main(String[] args) {
@@ -21,7 +21,6 @@ public class Main {
                     "\n1. Login" +
                     "\n2. Registrazione utente" +
                     "\n3. Guest" +
-                    "\n4. Aggiungi ristorante" +          // <-- aggiunto nel menu
                     "\n0. Esci" +
                     "\n----------------------------------" +
                     "\nScegli un'opzione: ");
@@ -71,17 +70,22 @@ public class Main {
                         System.out.println("Inserisci username");
                         username = sc.nextLine();
 
-                        if (fileUtenti.cercaMatch(username, 2)) {
+                        if (fileUtenti.cercaMatch(username, 3)) {
                             System.out.println("Username già esistente, riprova");
                             break;
                         } else {
                             System.out.println("Username disponibile");
+
                         }
 
                         System.out.println("Inserisci password");
                         password = sc.nextLine();
                         System.out.println("Inserisci data di nascita");
                         dataNascita = sc.nextLine();
+
+                        System.out.println("Inserisci domicilio (città o indirizzo)");
+                        String domicilio = sc.nextLine();
+
 
                         System.out.println("Sei un ristoratore? (1. Si / 2. No)");
 
@@ -97,7 +101,7 @@ public class Main {
                                 continue;
                         }
 
-                        utente = new Utente(nome, cognome, username, password, dataNascita, ruolo);
+                        utente = new Utente(nome, cognome, username, password, dataNascita, domicilio, ruolo);
                         System.out.println("Registrazione completata!");
                         System.out.println("Benvenuto " + utente.getUsername());
                         System.out.println("Effettua nuovamente il login dalla tab di inizio");
@@ -108,11 +112,6 @@ public class Main {
                         com.The_Knife_A.utility.GestioneGuest.menu(sc);
                         break;
 
-
-                    case 4:
-                        System.out.println("Aggiunta nuovo ristorante\n----------------------------------");
-                        GestioneRistoranti.aggiungiRistorante();   // <-- chiamata semplice
-                        break;
 
                     case 0:
                         System.out.println("Uscita dal programma...");

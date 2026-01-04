@@ -24,8 +24,9 @@ public class GestioneRistoratore {
             switch (scelta) {
 
                 case 1:
-                    GestioneRistoranti.aggiungiRistorante();
-                    break;
+                 GestioneRistoranti.aggiungiRistorante(u);
+                     break;
+
 
                 case 2:
                     System.out.println("Funzione recensioni (da implementare)");

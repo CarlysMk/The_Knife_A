@@ -1,5 +1,2 @@
-nome,cognome,username,password,datanascita,tipoutente
-Pietro,Smusi,Zeb,$2a$10$866rbNj0V.K5cv9FODNrdOP4u9mUogYZGfQh2HtjkUzINWf/vexUO,20.12.2001,utente
-ciccio,gamer,cicciogamer,$2a$10$WXQQoIxaaMnuvSp5xdtA9u7P5iysVdSL3tQTGg1tLZQymftLPM/dq,22122003,ristoratore
-ciao,cio,ciao,$2a$10$GIVVnKvSqbh7hFv1Zhz2QerqsQE7McsuOsgrLuWSFV/bOJdsWAVw2,ciao,ristoratore
-Maurizio,Costanzo,MC,$2a$10$GNozXfKOOrM0Z6OAZ4GTze4ZkgxgI7tzuHLyZ5nnGOK8FtBhSBhLm,1977,ristoratore
+1,Matteo,Dario,MD,$2a$10$wBf6Ap400eX4xJtcPA1CA.n41sBRBC4s8xpqlcZROEVmMOjuJMzmm,1999,calabria(fato peggiore della morte),utente
+2,Luigi,Mario,LM,$2a$10$A/UImkIcwYnE6l2IFC4t9uWkZNlIR7pBmRdEteC0jpH0oniFbUBze,1998,Regno dei funghi,ristoratore

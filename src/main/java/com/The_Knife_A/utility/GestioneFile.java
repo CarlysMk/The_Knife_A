@@ -72,33 +72,44 @@ public class GestioneFile {
     }
 
     public boolean cercaMatch(String match, int colonna) {
+
         String[] righe = getAllRows();
-        if (righe == null) {
-            return false;
-        }
+        if (righe == null) return false;
+
         for (String riga : righe) {
-            if (riga.split(",")[colonna].equals(match)) {
-                return true;
-            }
-        }
-        return false;
-    }
+          String[] campi = riga.split(",", -1);
+
+           if (campi.length > colonna && campi[colonna].equals(match)) {
+               return true;
+           }
+       }
+
+    return false;
+}
+
 
     public String getMatch(String match, int colonnaMatch, int colonnaGet) {
-        String[] righe = getAllRows();
-        if (righe == null) {
-            System.out.println("ritorno null");
-            return null;
-        }
-        for (String riga : righe) {
-            String ret = riga.split(",")[colonnaMatch];
-            String get = riga.split(",")[colonnaGet];
-            if (ret.equals(match)) {
-                return get;
+
+    String[] righe = getAllRows();
+    if (righe == null) return null;
+
+    for (String riga : righe) {
+
+        String[] campi = riga.split(",", -1);
+
+        // controllo colonna del match
+        if (campi.length > colonnaMatch && campi[colonnaMatch].equals(match)) {
+
+            // controllo colonna del valore da restituire
+            if (campi.length > colonnaGet) {
+                return campi[colonnaGet];
             }
         }
-        return null;
     }
+
+    return null;
+}
+
 
     private int getRowIndex(String match, int colonna) {
         String[] righe = getAllRows();
@@ -114,17 +125,26 @@ public class GestioneFile {
     }
 
     public String[] getRiga(String match, int colonna) {
-        String[] righe = getAllRows();
-        if (righe == null) {
-            return null;
-        }
-        if (getRowIndex(match, colonna) == -1) {
-            return null;
-        } else {
-            String[] riga = righe[getRowIndex(match, colonna)].split(",");
-            return riga;
+
+    String[] righe = getAllRows();
+    if (righe == null) return null;
+
+    for (String riga : righe) {
+
+        // spezza la riga per virgola
+        String[] campi = riga.split(",", -1);
+
+
+        // controlla che la colonna esista e confronta
+        if (campi.length > colonna && campi[colonna].equals(match)) {
+            return campi;
         }
     }
+
+    return null;
+}
+
+    
 
     //comandi per gestione CSV
     public static String[] getByName(String path, String nome) throws CsvValidationException{
