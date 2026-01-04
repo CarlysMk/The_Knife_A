@@ -121,7 +121,6 @@ public class GestioneFile {
         if (getRowIndex(match, colonna) == -1) {
             return null;
         } else {
-            // 🔹 QUI la correzione: ora usa le virgole
             String[] riga = righe[getRowIndex(match, colonna)].split(",");
             return riga;
         }

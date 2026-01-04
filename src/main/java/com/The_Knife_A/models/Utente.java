@@ -30,10 +30,7 @@ public class Utente {
         HashPsw = BCrypt.hashpw(psw, BCrypt.gensalt());
 
         // scrittura nel file CSV
-        file.scriviSuFile(
-                nome + "," + cognome + "," + username + "," + HashPsw + "," + dataNascita + "," + ruolo,
-                true
-        );
+        file.scriviSuFile(nome + "," + cognome + "," + username + "," + HashPsw + "," + dataNascita + "," + ruolo,true);
     }
 
     // costruttore per login utente
@@ -53,8 +50,8 @@ public class Utente {
         // Recupero dati da file
         String[] dati = file.getRiga(username, 2);
 
-        if (dati == null || dati.length < 6) {
-            System.out.println("Errore: dati utente non validi nel file.");
+        if (dati == null) {
+            System.out.println("Utente non trovato");
             return;
         }
 
