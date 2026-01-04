@@ -9,7 +9,7 @@ import com.The_Knife_A.utility.GestioneRistoranti;   // <-- aggiunto
 public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        GestioneFile fileUtenti = new GestioneFile("data/Utenti.txt");
+        GestioneFile fileUtenti = new GestioneFile("data/Utenti.csv");
 
         int scelta;
         String nome, cognome, username, password, dataNascita, ruolo;
@@ -21,8 +21,7 @@ public class Main {
                     "\n1. Login" +
                     "\n2. Registrazione utente" +
                     "\n3. Guest" +
-                    "\n4. Test" +
-                    "\n5. Aggiungi ristorante" +          // <-- aggiunto nel menu
+                    "\n4. Aggiungi ristorante" +          // <-- aggiunto nel menu
                     "\n0. Esci" +
                     "\n----------------------------------" +
                     "\nScegli un'opzione: ");
@@ -88,16 +87,6 @@ public class Main {
                         break;
 
                     case 4:
-                        String[] temp = fileUtenti.getCoords("data/Ristoranti.txt", "Jungsik New York");
-                        if (temp != null) {
-                            System.out.println("Latitudine: " + temp[0]);
-                            System.out.println("Longitudine: " + temp[1]);
-                        } else {
-                            System.out.println("Coordinate non trovate");
-                        }
-                        break;
-
-                    case 5:
                         System.out.println("Aggiunta nuovo ristorante\n----------------------------------");
                         GestioneRistoranti.aggiungiRistorante();   // <-- chiamata semplice
                         break;

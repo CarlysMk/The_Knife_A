@@ -11,7 +11,7 @@ public class Utente {
     private String [] domicilio = new String[3];
     private String HashPsw;
     boolean boolRuolo; // TRUE per ristoratore, FALSE per utente
-    private GestioneFile file = new GestioneFile("data/Utenti.txt");
+    private GestioneFile file = new GestioneFile("data/Utenti.csv");
 
     //costruttore per registrazione utente
     public Utente(String nome, String cognome, String username, String psw, String dataNascita, String ruolo) {
@@ -27,7 +27,7 @@ public class Utente {
             this.boolRuolo = false;
         }
         HashPsw = BCrypt.hashpw(psw, BCrypt.gensalt());
-        file.scriviSuFile(nome + "-" + cognome + "-" + username + "-" + HashPsw + "-" + dataNascita + "-" + ruolo, true);
+        file.scriviSuFile(nome + "," + cognome + "," + username + "," + HashPsw + "," + dataNascita + "," + ruolo, true);
 
     }
 
@@ -67,7 +67,7 @@ public class Utente {
         System.out.println("La password corrisponde? " + match); */
 
 
-  /*   GestioneFile file = new GestioneFile("data/Utenti.txt");
+  /*   GestioneFile file = new GestioneFile("data/Utenti.csv");
     file.scriviSuFile("Utente4", true);
     file.leggiDaFile(); */
 
@@ -83,7 +83,6 @@ public class Utente {
 
     public boolean login(String username, String password) {
         if(file.cercaMatch(username, 2)){
-            System.out.println("password trovata nel database..." + file.getMatch(username, 2, 3));
             if (BCrypt.checkpw(password, file.getMatch(username, 2, 3))) {
                 return true;
             } else {

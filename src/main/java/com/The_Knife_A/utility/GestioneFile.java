@@ -77,7 +77,7 @@ public class GestioneFile {
             return false;
         }
         for (String riga : righe) {
-            if (riga.split("-")[colonna].equals(match)) {
+            if (riga.split(",")[colonna].equals(match)) {
                 return true;
             }
         }
@@ -94,8 +94,8 @@ public class GestioneFile {
             return null;
         }
         for (String riga : righe) {
-            String ret = riga.split("-")[colonnaMatch];
-            String get = riga.split("-")[colonnaGet];
+            String ret = riga.split(",")[colonnaMatch];
+            String get = riga.split(",")[colonnaGet];
             if (ret.equals(match)) {
                 return get;
             }
@@ -109,7 +109,7 @@ public class GestioneFile {
             return -1;
         }
         for (int i = 0; i < righe.length; i++) {
-            if (righe[i].split("-")[colonna].equals(match)) {
+            if (righe[i].split(",")[colonna].equals(match)) {
                 return i;
             }
         }

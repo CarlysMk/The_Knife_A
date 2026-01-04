@@ -55,19 +55,19 @@ public class GestioneRistoranti {
         );
 
         // Scrivo il ristorante nel file (in append)
-        try (FileWriter fw = new FileWriter("data/Ristoranti.txt", true)) {
+        try (FileWriter fw = new FileWriter("data/Ristoranti.csv", true)) {
 
             // Riga in formato CSV semplice
             fw.write(
-                    r.getNome() + ";" +
-                    r.getNazione() + ";" +
-                    r.getCitta() + ";" +
-                    r.getIndirizzo() + ";" +
-                    r.getLatitudine() + ";" +
-                    r.getLongitudine() + ";" +
-                    r.getPrezzoMedio() + ";" +
-                    r.isDelivery() + ";" +
-                    r.isPrenotazioneOnline() + ";" +
+                    r.getNome() + "," +
+                    r.getNazione() + "," +
+                    r.getCitta() + "," +
+                    r.getIndirizzo() + "," +
+                    r.getLatitudine() + "," +
+                    r.getLongitudine() + "," +
+                    r.getPrezzoMedio() + "," +
+                    r.isDelivery() + "," +
+                    r.isPrenotazioneOnline() + "," +
                     r.getTipoCucina() + "\n"
             );
 
