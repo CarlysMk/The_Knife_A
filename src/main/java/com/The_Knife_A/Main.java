@@ -80,10 +80,10 @@ public class Main {
 
                         System.out.println("Inserisci password");
                         password = sc.nextLine();
-                        System.out.println("Inserisci data di nascita");
+                        System.out.println("Inserisci anno di nascita");
                         dataNascita = sc.nextLine();
 
-                        System.out.println("Inserisci domicilio (città o indirizzo)");
+                        System.out.println("Inserisci domicilio (citta' e stato)");
                         domicilio = sc.nextLine();
 
 
