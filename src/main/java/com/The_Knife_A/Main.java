@@ -12,7 +12,7 @@ public class Main {
         GestioneFile fileUtenti = new GestioneFile("data/Utenti.csv");
 
         int scelta;
-        String nome, cognome, username, password, dataNascita, ruolo;
+        String nome, cognome, username, password, dataNascita, domicilio, ruolo;
         Utente utente;
 
         while (true) {
@@ -84,7 +84,7 @@ public class Main {
                         dataNascita = sc.nextLine();
 
                         System.out.println("Inserisci domicilio (città o indirizzo)");
-                        String domicilio = sc.nextLine();
+                        domicilio = sc.nextLine();
 
 
                         System.out.println("Sei un ristoratore? (1. Si / 2. No)");

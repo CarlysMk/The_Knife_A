@@ -10,8 +10,7 @@ import java.io.IOException;
 public class Utente {
 
     private int id;
-    private String nome, cognome, username, ClearPassword, dataNascita, ruolo;
-    private String domicilio;
+    private String nome, cognome, username, ClearPassword, dataNascita, domicilio, ruolo;
 
     private String HashPsw;
     boolean boolRuolo;
@@ -52,9 +51,13 @@ public class Utente {
         this.dataNascita = dataNascita;
         this.domicilio = domicilio;
         this.ruolo = ruolo;
-        
 
-        this.boolRuolo = ruolo.equals("ristoratore");
+
+        if (this.ruolo.equals("ristoratore")) {
+            this.boolRuolo = true;
+        } else if (this.ruolo.equals("utente")) {
+            this.boolRuolo = false;
+        }
 
         HashPsw = BCrypt.hashpw(psw, BCrypt.gensalt());
 
@@ -86,8 +89,8 @@ public class Utente {
 
         String[] dati = file.getRiga(username, 3);
 
-        if (dati == null || dati.length < 8) {
-            System.out.println("Errore: dati utente non validi nel file.");
+        if (dati == null) {
+            System.out.println("Utente non trovato");
             return;
         }
 
@@ -98,7 +101,11 @@ public class Utente {
         this.domicilio = dati[6];
         this.ruolo = dati[7];
 
-        this.boolRuolo = ruolo.equals("ristoratore");
+        if (this.ruolo.equals("ristoratore")) {
+            this.boolRuolo = true;
+        } else if (this.ruolo.equals("utente")) {
+            this.boolRuolo = false;
+        }
     }
 
 
