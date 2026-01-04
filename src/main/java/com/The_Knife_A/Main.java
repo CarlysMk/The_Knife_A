@@ -32,13 +32,34 @@ public class Main {
 
                 switch (scelta) {
                     case 1:
-                        System.out.println("Login\n----------------------------------");
-                        System.out.println("inserisci username");
-                        username = sc.nextLine();
-                        System.out.println("inserisci password");
+                     System.out.println("Login\n----------------------------------");
+
+                     System.out.println("inserisci username");
+                         username = sc.nextLine();
+
+                     System.out.println("inserisci password");
                         password = sc.nextLine();
-                        utente = new Utente(username, password);
-                        break;
+
+                    // creo l'oggetto Utente per il login
+                     Utente temp = new Utente(username, password);
+
+                     // se il ruolo è stato caricato, il login è andato bene
+                   if (temp.getRuolo() != null) {
+
+                    // controllo il ruolo
+                     if (temp.getRuolo().equals("ristoratore")) {
+                        System.out.println("\nSei un ristoratore — entri nella tua area.");
+                        com.The_Knife_A.utility.GestioneRistoratore.menu(sc, temp);
+                      } else {
+                        System.out.println("\nSei un utente — entri nella tua area.");
+                        com.The_Knife_A.utility.GestioneUtente.menu(sc, temp);
+
+                       }
+
+                     } else {
+                        System.out.println("Login non riuscito.");
+                    }
+                            break;
 
                     case 2:
                         System.out.println("Registrazione nuovo utente");

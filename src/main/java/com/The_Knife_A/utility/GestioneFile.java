@@ -84,9 +84,6 @@ public class GestioneFile {
         return false;
     }
 
-    /* come il medoto cercaMatch ma restituisce il valore specifico ricercato
-   colonnaMatch = colonna in cui cercare il match
-   colonnaGet = colonna da cui restituire il valore */
     public String getMatch(String match, int colonnaMatch, int colonnaGet) {
         String[] righe = getAllRows();
         if (righe == null) {
@@ -121,14 +118,14 @@ public class GestioneFile {
         if (righe == null) {
             return null;
         }
-        if(getRowIndex(match, colonna) == -1){
+        if (getRowIndex(match, colonna) == -1) {
             return null;
-        }else {
-            String[] riga = righe[getRowIndex(match, colonna)].split("-");
+        } else {
+            // 🔹 QUI la correzione: ora usa le virgole
+            String[] riga = righe[getRowIndex(match, colonna)].split(",");
             return riga;
         }
     }
-
 
     //comandi per gestione CSV
     public static String[] getByName(String path, String nome) throws CsvValidationException{
@@ -148,7 +145,7 @@ public class GestioneFile {
     public String[] getCoords(String path, String nome){
         String [] coords = new String[2];
         try {
-            String[] temp =  getByName(path, nome);
+            String[] temp = getByName(path, nome);
             if (temp != null && temp.length >= 2) {
                 coords[0] = temp[5];
                 coords[1] = temp[6];
@@ -161,7 +158,4 @@ public class GestioneFile {
         }
         return null;
     }
-
 }
-
-
