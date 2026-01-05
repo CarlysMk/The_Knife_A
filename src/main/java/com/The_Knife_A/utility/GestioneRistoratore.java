@@ -14,7 +14,7 @@ public class GestioneRistoratore {
             System.out.println(
                     "\n--- MENU RISTORATORE ---" +
                     "\n1. Crea ristorante" +
-                    "\n2. Cerca ristorante (recensioni)" +
+                    "\n2. Visualizza Recensioni" +
                     "\n0. Logout" +
                     "\n------------------------" +
                     "\nScegli: ");

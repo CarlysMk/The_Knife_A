@@ -1,3 +1,6 @@
 id,idristoratore,nome,nazione,citta',indirizzo,latitudine,longitudine,prezzomedio,delivery,prenotazioneonline,tipocucina
 1,2,Da luigi,italia,napoli,via brombeis,231.0,213.0,2.0,true,false,commestibile
 2,4,google,italia,como,via leopardi 2,45.0,70.0,20.0,true,true,italiana
+3,4,dario,napoli,napoli,feako,502.0,500.0,3.0,true,true,true
+4,4,dadadada,dadada,dadadad,ddadad,0.0,0.0,0.0,false,false,sbobba
+5,4,google2,italia,como,via leopardi 2,5.0,10.0,20.0,true,true,italiana

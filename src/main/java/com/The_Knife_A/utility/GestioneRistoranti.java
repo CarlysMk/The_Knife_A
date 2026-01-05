@@ -14,30 +14,34 @@ public class GestioneRistoranti {
 
     private static final String FILE_RISTORANTI = "data/Ristoranti.csv";
 
-    // Legge l'ultimo ID e restituisce il prossimo
+    // Ritorna il prossimo ID disponibile leggendo l'ultimo nel file
     private static int getNextId() {
-        int lastId = 0;
+        int ultimoId = 0;
 
         try (BufferedReader br = new BufferedReader(new FileReader(FILE_RISTORANTI))) {
-            String line;
 
-            while ((line = br.readLine()) != null) {
-                if (line.trim().isEmpty()) continue;
+            String riga;
 
-                String[] campi = line.split(",");
+            while ((riga = br.readLine()) != null) {
+
+                if (riga.trim().isEmpty()) continue;
+
+                String[] campi = riga.split(",");
 
                 try {
-                    lastId = Integer.parseInt(campi[0]);
+                    ultimoId = Integer.parseInt(campi[0]);
                 } catch (NumberFormatException ignored) {}
             }
+
         } catch (IOException e) {
-            // se il file non esiste, si parte da 1
+            // se il file non esiste parto da 0
         }
 
-        return lastId + 1;
+        return ultimoId + 1;
     }
 
-    // Aggiunge un nuovo ristorante
+
+    // Inserimento di un nuovo ristorante da parte del ristoratore
     public static void aggiungiRistorante(Utente proprietario) {
 
         Scanner scanner = new Scanner(System.in);
@@ -48,7 +52,7 @@ public class GestioneRistoranti {
         System.out.print("Nazione: ");
         String nazione = scanner.nextLine();
 
-        System.out.print("Citta: ");
+        System.out.print("Città: ");
         String citta = scanner.nextLine();
 
         System.out.print("Indirizzo: ");
@@ -61,13 +65,13 @@ public class GestioneRistoranti {
         double longitudine = Double.parseDouble(scanner.nextLine());
 
         System.out.print("Prezzo medio: ");
-        double prezzo = Double.parseDouble(scanner.nextLine());
+        double prezzoMedio = Double.parseDouble(scanner.nextLine());
 
         System.out.print("Delivery (true/false): ");
         boolean delivery = Boolean.parseBoolean(scanner.nextLine());
 
         System.out.print("Prenotazione online (true/false): ");
-        boolean prenotazione = Boolean.parseBoolean(scanner.nextLine());
+        boolean prenotazioneOnline = Boolean.parseBoolean(scanner.nextLine());
 
         System.out.print("Tipo cucina: ");
         String tipoCucina = scanner.nextLine();
@@ -77,13 +81,14 @@ public class GestioneRistoranti {
         Ristorante r = new Ristorante(
                 nome, nazione, citta, indirizzo,
                 latitudine, longitudine,
-                prezzo,
-                delivery, prenotazione,
+                prezzoMedio,
+                delivery, prenotazioneOnline,
                 tipoCucina
         );
 
         try (FileWriter fw = new FileWriter(FILE_RISTORANTI, true)) {
 
+            // Scrive una nuova riga CSV
             fw.write(
                     id + "," +
                     proprietario.getId() + "," +
@@ -107,51 +112,74 @@ public class GestioneRistoranti {
     }
 
 
-    private static double distanza(double lat1, double lon1, double lat2, double lon2) {
-        double RADIUS = 6371;
-        double lat1Rad = Math.toRadians(lat1);
-        double lon1Rad = Math.toRadians(lon1);
-        double lat2Rad = Math.toRadians(lat2);
-        double lon2Rad = Math.toRadians(lon2);
+    // ---------------------------------
+    // CERCA i tre ristoranti più vicini
+    // (mostra solo i nomi)
+    // ---------------------------------
+    public static void cercaTrePiuVicini(Scanner sc) {
 
-        double deltaLat = lat2Rad - lat1Rad;
-        double deltaLon = lon2Rad - lon1Rad;
+        try {
+            System.out.print("Inserisci la tua latitudine: ");
+            double latUtente = Double.parseDouble(sc.nextLine());
 
-        double a = Math.pow(Math.sin(deltaLat / 2), 2)
-                + Math.cos(lat1Rad) * Math.cos(lat2Rad) * Math.pow(Math.sin(deltaLon / 2), 2);
-        double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+            System.out.print("Inserisci la tua longitudine: ");
+            double lonUtente = Double.parseDouble(sc.nextLine());
 
-        return RADIUS * c;
-    }
+            BufferedReader br = new BufferedReader(new FileReader(FILE_RISTORANTI));
 
-    public static ArrayList<Ristorante> getCoordinateRistoranti() {
+            String riga;
 
-        ArrayList<Ristorante> lista = new ArrayList<>();
+            // migliori tre risultati
+            String[] miglioriNomi = { "-", "-", "-" };
+            double[] miglioriDistanze = {
+                    Double.MAX_VALUE,
+                    Double.MAX_VALUE,
+                    Double.MAX_VALUE
+            };
 
-        try (BufferedReader br = new BufferedReader(new FileReader("data/Ristoranti.csv"))) {
+            while ((riga = br.readLine()) != null) {
 
-            String line;
+                if (riga.trim().isEmpty()) continue;
 
-            while ((line = br.readLine()) != null) {
+                String[] campi = riga.split(",", -1);
 
-                if (line.trim().isEmpty()) continue;
+                // salta intestazione
+                if (campi[0].equalsIgnoreCase("id")) continue;
 
-                String[] campi = line.split(",");
+                String nome = campi[2];
+                double lat = Double.parseDouble(campi[6]);
+                double lon = Double.parseDouble(campi[7]);
 
-                int id = Integer.parseInt(campi[0]);
-                double lat = Double.parseDouble(campi[5]);
-                double lon = Double.parseDouble(campi[6]);
+                // distanza semplificata (basta per il ranking)
+                double distanza =
+                        Math.pow(latUtente - lat, 2) +
+                        Math.pow(lonUtente - lon, 2);
 
-                lista.add(new Ristorante(id, lat, lon));
+                // inserisce ordinando i 3 migliori
+                for (int i = 0; i < 3; i++) {
+                    if (distanza < miglioriDistanze[i]) {
+
+                        for (int j = 2; j > i; j--) {
+                            miglioriDistanze[j] = miglioriDistanze[j - 1];
+                            miglioriNomi[j]      = miglioriNomi[j - 1];
+                        }
+
+                        miglioriDistanze[i] = distanza;
+                        miglioriNomi[i]     = nome;
+                        break;
+                    }
+                }
             }
 
+            br.close();
+
+            System.out.println("\nI 3 ristoranti più vicini:");
+            System.out.println("1) " + miglioriNomi[0]);
+            System.out.println("2) " + miglioriNomi[1]);
+            System.out.println("3) " + miglioriNomi[2]);
+
         } catch (Exception e) {
-            System.out.println("Errore lettura ristoranti: " + e.getMessage());
+            System.out.println("Errore nella ricerca: " + e.getMessage());
         }
-
-        return lista;
     }
-
-
-
 }
