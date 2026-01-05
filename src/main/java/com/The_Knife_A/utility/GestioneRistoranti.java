@@ -288,33 +288,46 @@ public class GestioneRistoranti {
                 System.out.println("Errore lettura recensioni: " + e.getMessage());
             }
 
-            System.out.println(
-                "\n1. Aggiungi ai preferiti" +
-                "\n2. Lascia una recensione" +
-                "\n0. Torna indietro" +
-                "\nScegli: "
-            );
+            if (utenteLoggato == null) {
+                System.out.println("\n0. Torna indietro");
+                
+            } else {
+        System.out.println(
+            "\n1. Aggiungi ai preferiti" +
+            "\n2. Lascia una recensione" +
+            "\n0. Torna indietro" +
+            "\nScegli: "
+        );
+}
+
 
             int azione = Integer.parseInt(sc.nextLine());
+            if (utenteLoggato == null) {
+                return;
+            } 
+            else {
+                switch (azione) {
 
-            switch (azione) {
-
-                case 1:
-                    System.out.println("Aggiunta ai preferiti (da implementare)");
-                    break;
-
-                case 2:
-                    GestioneRecensioni.lasciaRecensione(
-                        sc,
-                        idSelezionato,
-                        utenteLoggato.getId()
+                    case 1:
+                        GestionePreferiti.aggiungiPreferito(
+                            utenteLoggato.getId(),
+                            idSelezionato
                     );
-                    break;
+                        break;
 
-                case 0:
-                    return;
+
+                    case 2:
+                        GestioneRecensioni.lasciaRecensione(
+                            sc,
+                            idSelezionato,
+                            utenteLoggato.getId()
+                        );
+                        break;
+
+                    case 0:
+                        return;
+                }
             }
-
         } catch (Exception e) {
             System.out.println("Errore nella ricerca: " + e.getMessage());
         }

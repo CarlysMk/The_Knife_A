@@ -102,6 +102,8 @@ public class Main {
                         }
 
                         utente = new Utente(nome, cognome, username, password, dataNascita, domicilio, ruolo);
+                        com.The_Knife_A.utility.GestionePreferiti.inizializzaPreferitiPerUtente(utente.getId());
+                        
                         System.out.println("Registrazione completata!");
                         System.out.println("Benvenuto " + utente.getUsername());
                         System.out.println("Effettua nuovamente il login dalla tab di inizio");
