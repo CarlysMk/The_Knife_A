@@ -1,1 +1,1 @@
-id,idristorante,stelle,commento,risposta
+id,idRistorante,idUtente,stelle,commento,risposta,idRistoratore

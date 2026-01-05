@@ -24,13 +24,15 @@ public class GestioneRistoratore {
             switch (scelta) {
 
                 case 1:
-                 GestioneRistoranti.aggiungiRistorante(u);
-                     break;
+                    GestioneRistoranti.aggiungiRistorante(u);
+                    break;
 
 
                 case 2:
-                    System.out.println("Funzione recensioni (da implementare)");
+                    GestioneRecensioni.rispondiRecensioni(sc, u.getId());
                     break;
+
+
 
                 case 0:
                     System.out.println("Logout effettuato.");

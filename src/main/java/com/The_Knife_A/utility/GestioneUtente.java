@@ -3,7 +3,6 @@ package com.The_Knife_A.utility;
 import java.util.Scanner;
 import com.The_Knife_A.models.Utente;
 
-
 // Classe che gestisce il menu e le azioni per l'utente normale
 public class GestioneUtente {
 
@@ -26,11 +25,12 @@ public class GestioneUtente {
             switch (scelta) {
 
                 case 1:
-                    GestioneRistoranti.cercaTrePiuVicini(sc);
+                    // ora passiamo anche l'utente loggato
+                    GestioneRistoranti.cercaTrePiuVicini(sc, u);
                     break;
 
                 case 2:
-                    System.out.println("Visualizza ristoranti preferiti");
+                    System.out.println("Visualizza ristoranti preferiti (in sviluppo)");
                     break;
 
                 case 0:
