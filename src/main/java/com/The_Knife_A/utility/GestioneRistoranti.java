@@ -4,6 +4,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 import com.The_Knife_A.models.Ristorante;
@@ -105,21 +106,52 @@ public class GestioneRistoranti {
         }
     }
 
-    
+
     private static double distanza(double lat1, double lon1, double lat2, double lon2) {
-        double R = 6371; // km
-        double dLat = Math.toRadians(lat2 - lat1);
-        double dLon = Math.toRadians(lon2 - lon1);
+        double RADIUS = 6371;
+        double lat1Rad = Math.toRadians(lat1);
+        double lon1Rad = Math.toRadians(lon1);
+        double lat2Rad = Math.toRadians(lat2);
+        double lon2Rad = Math.toRadians(lon2);
 
-        lat1 = Math.toRadians(lat1);
-        lat2 = Math.toRadians(lat2);
+        double deltaLat = lat2Rad - lat1Rad;
+        double deltaLon = lon2Rad - lon1Rad;
 
-        double a = Math.sin(dLat/2) * Math.sin(dLat/2) +
-                Math.sin(dLon/2) * Math.sin(dLon/2) * Math.cos(lat1) * Math.cos(lat2);
+        double a = Math.pow(Math.sin(deltaLat / 2), 2)
+                + Math.cos(lat1Rad) * Math.cos(lat2Rad) * Math.pow(Math.sin(deltaLon / 2), 2);
+        double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
 
-        double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
-
-        return R * c;
+        return RADIUS * c;
     }
+
+    public static ArrayList<Ristorante> getCoordinateRistoranti() {
+
+        ArrayList<Ristorante> lista = new ArrayList<>();
+
+        try (BufferedReader br = new BufferedReader(new FileReader("data/Ristoranti.csv"))) {
+
+            String line;
+
+            while ((line = br.readLine()) != null) {
+
+                if (line.trim().isEmpty()) continue;
+
+                String[] campi = line.split(",");
+
+                int id = Integer.parseInt(campi[0]);
+                double lat = Double.parseDouble(campi[5]);
+                double lon = Double.parseDouble(campi[6]);
+
+                lista.add(new Ristorante(id, lat, lon));
+            }
+
+        } catch (Exception e) {
+            System.out.println("Errore lettura ristoranti: " + e.getMessage());
+        }
+
+        return lista;
+    }
+
+
 
 }

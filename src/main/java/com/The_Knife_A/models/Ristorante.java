@@ -2,12 +2,11 @@ package com.The_Knife_A.models;
 
 // Classe che rappresenta un ristorante
 public class Ristorante {
-
+    private int id;
     private String nome;
     private String nazione;
     private String citta;
     private String indirizzo;
-
     private double latitudine;
     private double longitudine;
 
@@ -72,4 +71,11 @@ public class Ristorante {
 
     public String getTipoCucina() { return tipoCucina; }
     public void setTipoCucina(String tipoCucina) { this.tipoCucina = tipoCucina; }
+
+
+    public Ristorante(int id, double latitudine, double longitudine) {
+        this.id = id;
+        this.latitudine = latitudine;
+        this.longitudine = longitudine;
+    }
 }
