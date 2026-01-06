@@ -7,16 +7,32 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 
+/**
+ * Rappresenta un utente registrato nel sistema.
+ * <p>
+ * La classe gestisce sia la registrazione di un nuovo utente
+ * (assegnando un identificativo e salvando i dati su file)
+ * sia il login di un utente esistente tramite verifica della password cifrata.
+ */
 public class Utente {
 
     private int id;
     private String nome, cognome, username, ClearPassword, dataNascita, domicilio, ruolo;
-
     private String HashPsw;
+
+    /** Flag interno per distinguere il ruolo dell'utente. */
     boolean boolRuolo;
+
+    /** Gestore del file contenente i dati degli utenti. */
     private GestioneFile file = new GestioneFile("data/Utenti.csv");
 
-
+    /**
+     * Restituisce il prossimo id disponibile leggendo l'ultima riga del file utenti.
+     * <p>
+     * Utilizzato durante la registrazione di un nuovo utente.
+     *
+     * @return id incrementale successivo
+     */
     private int getNextUserId() {
 
         int lastId = 0;
@@ -40,8 +56,15 @@ public class Utente {
         return lastId + 1;
     }
 
-
-    public Utente(String nome, String cognome, String username, String psw, String dataNascita,String domicilio, String ruolo) {
+    /**
+     * Costruisce un nuovo utente e lo salva nel file.
+     * <p>
+     * La password viene cifrata automaticamente tramite {@code BCrypt}
+     * prima della memorizzazione.
+     */
+    public Utente(String nome, String cognome, String username,
+                  String psw, String dataNascita,
+                  String domicilio, String ruolo) {
 
         this.id = getNextUserId();
         this.nome = nome;
@@ -51,7 +74,6 @@ public class Utente {
         this.dataNascita = dataNascita;
         this.domicilio = domicilio;
         this.ruolo = ruolo;
-
 
         if (this.ruolo.equals("ristoratore")) {
             this.boolRuolo = true;
@@ -74,7 +96,12 @@ public class Utente {
         );
     }
 
-
+    /**
+     * Costruttore utilizzato per il login.
+     * <p>
+     * Verifica le credenziali e, in caso positivo,
+     * carica i dati dell'utente dal file.
+     */
     public Utente(String username, String psw) {
 
         this.username = username;
@@ -108,16 +135,23 @@ public class Utente {
         }
     }
 
-
+    /** Restituisce l'id utente. */
     public int getId() { return id; }
 
+    /** Restituisce l'username. */
     public String getUsername() { return username; }
 
+    /** Restituisce il ruolo. */
     public String getRuolo() { return ruolo; }
 
+    /** Restituisce il domicilio. */
     public String getDomicilio() { return domicilio; }
 
-
+    /**
+     * Verifica username e password confrontando l'hash salvato nel file.
+     *
+     * @return {@code true} se le credenziali sono corrette, {@code false} altrimenti
+     */
     public boolean login(String username, String password) {
 
         if (file.cercaMatch(username, 3)) {
