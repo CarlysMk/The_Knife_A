@@ -1,3 +1,11 @@
+/**************************************
+ * Matricola    Cognome     Nome
+ * 754320       Baracca     Filippo
+ * 753747       Masolo      Carlos
+ *
+ * Sede: Como
+***************************************/
+
 package com.The_Knife_A;
 
 import java.util.Scanner;
@@ -6,7 +14,29 @@ import com.The_Knife_A.models.Utente;
 import com.The_Knife_A.utility.GestioneFile;
 import com.The_Knife_A.utility.GestioneRistoranti;   
 
+/**
+ * Punto di avvio dell'applicazione The Knife.
+ * <p>
+ * Il programma permette di gestire utenti, ristoratori e guest.
+ * Attraverso un menu testuale l'utente può:
+ * <ul>
+ *     <li>effettuare il login</li>
+ *     <li>registrarsi come nuovo utente</li>
+ *     <li>accedere come ospite</li>
+ *     <li>uscire dal programma</li>
+ * </ul>
+ * Le funzionalità vengono poi demandate alle classi di gestione
+ * dedicate (utente, ristoratore, guest, file, ecc.).
+ */
 public class Main {
+
+    /**
+     * Avvia il menu principale dell'applicazione e gestisce
+     * il flusso di interazione con l'utente.
+     * <p>
+     * Rimane in esecuzione finché non viene selezionata
+     * l'opzione di uscita.
+     */
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         GestioneFile fileUtenti = new GestioneFile("data/Utenti.csv");
