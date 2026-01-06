@@ -1,3 +1,7 @@
+package com.The_Knife_A.utility;
+
+import java.util.Scanner;
+import com.The_Knife_A.models.Utente;
 /**************************************
  * Matricola    Cognome     Nome
  * 754320       Baracca     Filippo
@@ -5,75 +9,52 @@
  *
  * Sede: Como
  ***************************************/
-
-package com.The_Knife_A.utility;
-
-import java.util.Scanner;
-import com.The_Knife_A.models.Utente;
-
 /**
- * Gestisce le funzionalità riservate ai ristoratori.
+ * Gestisce le funzioni disponibili ai ristoratori.
  * <p>
- * Attraverso questa classe il ristoratore può inserire nuovi
- * ristoranti, visualizzare le recensioni ricevute e consultare
- * il riepilogo delle valutazioni complessive.
- * <p>
- * Viene richiamata dal menù utente quando il profilo loggato
- * possiede ruolo di ristoratore.
+ * Da questo menù il ristoratore può creare nuovi ristoranti
+ * e gestire le recensioni ricevute sulle proprie attività.
  */
 public class GestioneRistoratore {
 
+    // menu principale ristoratore
+
     /**
-     * Mostra il menù principale del ristoratore.
+     * Mostra il menù dedicato al ristoratore e gestisce le operazioni selezionate.
      * <p>
-     * Ogni opzione corrisponde a una delle operazioni di gestione
-     * dei ristoranti associati all'utente.
+     * Il ciclo rimane attivo finché l’utente non effettua il logout.
      *
-     * @param sc scanner per l'interazione a terminale
-     * @param utente ristoratore attualmente loggato
+     * @param sc scanner utilizzato per l’interazione con l’utente
+     * @param u  ristoratore attualmente loggato
      */
-    public static void menuRistoratore(Scanner sc, Utente utente) {
+    public static void menu(Scanner sc, Utente u) {
 
         int scelta;
 
         do {
             System.out.println(
-                "\n--- AREA RISTORATORE ---" +
-                "\n1. Aggiungi ristorante" +
-                "\n2. Visualizza riepilogo recensioni" +
-                "\n3. Visualizza recensioni dettagliate" +
-                "\n4. Rispondi alle recensioni" +
-                "\n0. Torna al menu precedente" +
-                "\n-------------------------" +
-                "\nScegli: "
-            );
+                    "\n--- MENU RISTORATORE ---" +
+                    "\n1. Crea ristorante" +
+                    "\n2. Visualizza Recensioni" +
+                    "\n0. Logout" +
+                    "\n------------------------" +
+                    "\nScegli: ");
 
             scelta = Integer.parseInt(sc.nextLine());
 
             switch (scelta) {
 
                 case 1:
-                    GestioneRistoranti.aggiungiRistorante(sc, utente);
+                    GestioneRistoranti.aggiungiRistorante(u);
                     break;
 
                 case 2:
-                    GestioneRistoranti.visualizzaRiepilogo(utente);
-                    break;
-
-                case 3:
-                    GestioneRistoranti.visualizzaRecensioni(utente);
-                    break;
-
-                case 4:
-                    GestioneRecensioni.rispostaRecensioni(sc, utente);
+                    GestioneRecensioni.rispondiRecensioni(sc, u.getId());
                     break;
 
                 case 0:
-                    System.out.println("Ritorno al menu utente.");
+                    System.out.println("Logout effettuato.");
                     break;
-
-                default:
-                    System.out.println("Scelta non valida.");
             }
 
         } while (scelta != 0);
