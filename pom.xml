@@ -13,20 +13,48 @@
             <artifactId>jbcrypt</artifactId>
             <version>0.4</version>
         </dependency>
+
         <dependency>
             <groupId>com.opencsv</groupId>
             <artifactId>opencsv</artifactId>
             <version>5.7.1</version>
         </dependency>
     </dependencies>
+
     <build>
         <plugins>
+
+            <plugin>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <version>3.3.0</version>
+                <executions>
+                    <execution>
+                        <id>The_Knife-jar</id>
+                        <phase>package</phase>
+                        <goals><goal>single</goal></goals>
+                        <configuration>
+                            <archive>
+                                <manifest>
+                                    <mainClass>com.The_Knife_A.Main</mainClass>
+                                </manifest>
+                            </archive>
+                            <descriptorRefs>
+                                <descriptorRef>jar-with-dependencies</descriptorRef>
+                            </descriptorRefs>
+                            <finalName>The_Knife</finalName>
+                            <outputDirectory>${project.basedir}/bin</outputDirectory>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>3.5.0</version>
                 <configuration>
-                    <source>11</source>
-                    <target>11</target>
+                    <failOnError>false</failOnError>
+                    <reportOutputDirectory>${project.basedir}/doc</reportOutputDirectory>
                 </configuration>
             </plugin>
         </plugins>

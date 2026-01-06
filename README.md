@@ -16,6 +16,10 @@ Apri il terminale nella root del progetto ed esegui:
 
 mvn clean package
 
+Se non genera la Javadoc eseguire subito dopo il comando :
+
+mvn javadoc:javadoc
+
 ### 2. Avvio del progetto
 
 - Fare doppio sul file Apriprogetto per far partire il progetto
