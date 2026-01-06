@@ -1,3 +1,10 @@
+/**************************************
+ * Matricola    Cognome     Nome
+ * 754320       Baracca     Filippo
+ * 753747       Masolo      Carlos
+ *
+ * Sede: Como
+ ***************************************/
 package com.The_Knife_A.utility;
 
 import java.io.FileWriter;
@@ -86,32 +93,17 @@ public class GestioneRistoranti {
 
         int id = getNextId();
 
-        Ristorante r = new Ristorante(
-            nome, nazione, citta, indirizzo,
-            latitudine, longitudine,
-            prezzoMedio,
-            delivery, prenotazioneOnline,
-            tipoCucina
-        );
+        Ristorante r = new Ristorante(nome, nazione, citta, indirizzo, latitudine, longitudine, prezzoMedio,
+            delivery, prenotazioneOnline, tipoCucina);
 
         try (FileWriter fw = new FileWriter(FILE_RISTORANTI, true)) {
 
-            fw.write(
-                id + "," +
-                proprietario.getId() + "," +
-                r.getNome() + "," +
-                r.getNazione() + "," +
-                r.getCitta() + "," +
-                r.getIndirizzo() + "," +
-                r.getLatitudine() + "," +
-                r.getLongitudine() + "," +
-                r.getPrezzoMedio() + "," +
-                r.isDelivery() + "," +
-                r.isPrenotazioneOnline() + "," +
-                r.getTipoCucina() + "\n"
-            );
+            fw.write(id + "," + proprietario.getId() + "," + r.getNome() + "," + r.getNazione() + "," +
+                    r.getCitta() + "," + r.getIndirizzo() + "," + r.getLatitudine() + "," + r.getLongitudine() + "," +
+                    r.getPrezzoMedio() + "," + r.isDelivery() + "," + r.isPrenotazioneOnline() + "," +
+                    r.getTipoCucina() + "\n");
 
-            System.out.println("Ristorante aggiunto con ID: " + id);
+            System.out.println("Ristorante aggiunto correttamente");
 
         } catch (IOException e) {
             System.out.println("Errore durante il salvataggio del ristorante.");
@@ -222,7 +214,6 @@ public class GestioneRistoranti {
 
             int idSelezionato = viciniId[scelta - 1];
 
-            // carica scheda ristorante
             String[] campiSel = null;
 
             try (BufferedReader br2 = new BufferedReader(new FileReader(FILE_RISTORANTI))) {
@@ -312,12 +303,8 @@ public class GestioneRistoranti {
                 System.out.println("\n0. Torna indietro");
 
             } else {
-                System.out.println(
-                    "\n1. Aggiungi ai preferiti" +
-                    "\n2. Lascia una recensione" +
-                    "\n0. Torna indietro" +
-                    "\nScegli: "
-                );
+                System.out.println("\n1. Aggiungi ai preferiti" + "\n2. Lascia una recensione" +
+                        "\n0. Torna indietro" + "\nScegli: ");
             }
 
             int azione = Integer.parseInt(sc.nextLine());

@@ -1,7 +1,3 @@
-package com.The_Knife_A.utility;
-
-import java.util.Scanner;
-import com.The_Knife_A.models.Utente;
 /**************************************
  * Matricola    Cognome     Nome
  * 754320       Baracca     Filippo
@@ -9,6 +5,10 @@ import com.The_Knife_A.models.Utente;
  *
  * Sede: Como
  ***************************************/
+package com.The_Knife_A.utility;
+
+import java.util.Scanner;
+import com.The_Knife_A.models.Utente;
 /**
  * Gestisce le funzionalità disponibili agli utenti registrati.
  * <p>
@@ -21,8 +21,6 @@ public class GestioneUtente {
     /**
      * Mostra il menù dell’utente autenticato e gestisce le scelte effettuate.
      * <p>
-     * Le opzioni disponibili dipendono dalle funzionalità attive
-     * per l’utente registrato.
      *
      * @param sc scanner utilizzato per l’interazione a terminale
      * @param u  utente attualmente loggato

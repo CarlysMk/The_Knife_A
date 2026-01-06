@@ -4,7 +4,7 @@
  * 753747       Masolo      Carlos
  *
  * Sede: Como
-***************************************/
+ ***************************************/
 
 package com.The_Knife_A;
 
@@ -12,7 +12,6 @@ import java.util.Scanner;
 
 import com.The_Knife_A.models.Utente;
 import com.The_Knife_A.utility.GestioneFile;
-import com.The_Knife_A.utility.GestioneRistoranti;   
 
 /**
  * Punto di avvio dell'applicazione The Knife.
@@ -26,7 +25,7 @@ import com.The_Knife_A.utility.GestioneRistoranti;
  *     <li>uscire dal programma</li>
  * </ul>
  * Le funzionalità vengono poi demandate alle classi di gestione
- * dedicate (utente, ristoratore, guest, file, ecc.).
+ * dedicate (utente, ristoratore, ecc.).
  */
 public class Main {
 
@@ -92,7 +91,6 @@ public class Main {
 
                     case 2:
                         System.out.println("Registrazione nuovo utente");
-
                         System.out.println("Inserisci nome");
                         nome = sc.nextLine();
                         System.out.println("Inserisci cognome");

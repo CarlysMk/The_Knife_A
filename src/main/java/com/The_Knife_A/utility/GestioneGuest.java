@@ -1,7 +1,3 @@
-package com.The_Knife_A.utility;
-
-import java.util.Scanner;
-
 /**************************************
  * Matricola    Cognome     Nome
  * 754320       Baracca     Filippo
@@ -9,6 +5,10 @@ import java.util.Scanner;
  *
  * Sede: Como
  ***************************************/
+package com.The_Knife_A.utility;
+
+import java.util.Scanner;
+
 
 /**
  * Gestisce l’area dedicata agli utenti guest (non registrati).
@@ -18,7 +18,6 @@ import java.util.Scanner;
  * Viene richiamata dal menù principale quando l’utente sceglie
  * di continuare senza effettuare il login.
  */
-// Menu per utenti Guest (non registrati)
 public class GestioneGuest {
 
     /**
@@ -46,15 +45,15 @@ public class GestioneGuest {
             switch (scelta) {
 
                 case 1:
-                    System.out.println("Funzione ricerca ristoranti (in sviluppo)");
+                    System.out.println("Ricerca ristoranti");
                     break;
 
                 case 0:
-                    System.out.println("Ritorno al menu principale.");
+                    System.out.println("Ritorno al menu principale");
                     break;
 
                 default:
-                    System.out.println("Scelta non valida.");
+                    System.out.println("Scelta non valida");
             }
 
         } while (scelta != 0);

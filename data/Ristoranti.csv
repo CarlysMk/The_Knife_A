@@ -1,5 +1,5 @@
 id,idristoratore,nome,nazione,citta',indirizzo,latitudine,longitudine,prezzomedio,delivery,prenotazioneonline,tipocucina
-1,4,Il Muro,America,Washington,College Street 14,38.9073,77.0369,32.0,true,false,Americana
-2,4,Trump Burgher,Venezuela,Caracas,C.Nueva 5,10.4806,66.9036,8.0,true,true,Venezuelana
-3,3,Ristorante Villa Crespi,Italia,Novara,Via Giuseppe Fava 18,45.4468,8.6169,40.0,false,false,Italiana
-4,3,CiccioBurgher,Italia,Roma,via brombeis,41.8967,12.4822,20.0,true,true,italiana
+1,4,pizzicheria,Italia,Bibbiena,Borgo Martellini 1,43.646,12.066,10.0,false,false,Italiana
+2,4,Le Poulbot,Francia,Parigi,Norvins 5,48.887,2.341,40.0,false,true,francese
+3,5,big burger,America,New York,Broadway 160,42.24,73.59,20.0,true,false,Americana
+4,5,Restaurant Gordon Ramsay,Regno Unito,Londra,Royal Hospital Rd 68,51.3,0.07,150.0,false,true,Inglese

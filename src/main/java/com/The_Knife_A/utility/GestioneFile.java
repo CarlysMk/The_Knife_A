@@ -1,3 +1,10 @@
+/**************************************
+ * Matricola    Cognome     Nome
+ * 754320       Baracca     Filippo
+ * 753747       Masolo      Carlos
+ *
+ * Sede: Como
+ ***************************************/
 package com.The_Knife_A.utility;
 
 import java.io.BufferedReader;
@@ -13,13 +20,7 @@ import java.util.ArrayList;
 import com.opencsv.CSVReader;
 import com.opencsv.exceptions.CsvValidationException;
 
-/**************************************
- * Matricola    Cognome     Nome
- * 754320       Baracca     Filippo
- * 753747      Masolo      Carlos
- *              
- * Sede: Como
-***************************************/
+
 /**
  * Classe di utilità per la gestione dei file del progetto.
  * <p>
@@ -135,10 +136,8 @@ public class GestioneFile {
 
         String[] campi = riga.split(",", -1);
 
-        // controllo colonna del match
         if (campi.length > colonnaMatch && campi[colonnaMatch].equals(match)) {
 
-            // controllo colonna del valore da restituire
             if (campi.length > colonnaGet) {
                 return campi[colonnaGet];
             }
@@ -176,10 +175,8 @@ public class GestioneFile {
 
     for (String riga : righe) {
 
-        // spezza la riga per virgola
         String[] campi = riga.split(",", -1);
 
-        // controlla che la colonna esista e confronta
         if (campi.length > colonna && campi[colonna].equals(match)) {
             return campi;
         }
@@ -188,7 +185,6 @@ public class GestioneFile {
     return null;
 }
 
-    // comandi per gestione CSV
 
     /**
      * Restituisce una riga dal file CSV in base al nome fornito.

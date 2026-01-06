@@ -1,3 +1,10 @@
+/**************************************
+ * Matricola    Cognome     Nome
+ * 754320       Baracca     Filippo
+ * 753747       Masolo      Carlos
+ *
+ * Sede: Como
+ ***************************************/
 package com.The_Knife_A.models;
 
 import org.mindrot.jbcrypt.BCrypt;
@@ -62,9 +69,8 @@ public class Utente {
      * La password viene cifrata automaticamente tramite {@code BCrypt}
      * prima della memorizzazione.
      */
-    public Utente(String nome, String cognome, String username,
-                  String psw, String dataNascita,
-                  String domicilio, String ruolo) {
+    public Utente(String nome, String cognome, String username, String psw, String dataNascita, String domicilio,
+                  String ruolo) {
 
         this.id = getNextUserId();
         this.nome = nome;
@@ -83,17 +89,8 @@ public class Utente {
 
         HashPsw = BCrypt.hashpw(psw, BCrypt.gensalt());
 
-        file.scriviSuFile(
-                id + "," +
-                nome + "," +
-                cognome + "," +
-                username + "," +
-                HashPsw + "," +
-                dataNascita + "," +
-                domicilio + "," +
-                ruolo,
-                true
-        );
+        file.scriviSuFile(id + "," + nome + "," + cognome + "," + username + "," + HashPsw + "," +
+                        dataNascita + "," + domicilio + "," + ruolo, true);
     }
 
     /**

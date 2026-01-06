@@ -1,13 +1,13 @@
-package com.The_Knife_A.models;
-
-
 /**************************************
  * Matricola    Cognome     Nome
  * 754320       Baracca     Filippo
- * 753747      Masolo      Carlos
- *              
+ * 753747       Masolo      Carlos
+ *
  * Sede: Como
-***************************************/
+ ***************************************/
+package com.The_Knife_A.models;
+
+
 /**
  * Rappresenta un ristorante presente nella piattaforma TheKnife.
  * <p>
@@ -18,38 +18,10 @@ package com.The_Knife_A.models;
  */
 public class Ristorante {
 
-    /** Identificativo univoco del ristorante. */
     private int id;
-
-    /** Nome del ristorante. */
-    private String nome;
-
-    /** Nazione in cui si trova il ristorante. */
-    private String nazione;
-
-    /** Città in cui si trova il ristorante. */
-    private String citta;
-
-    /** Indirizzo completo del ristorante. */
-    private String indirizzo;
-
-    /** Latitudine (coordinate geografiche). */
-    private double latitudine;
-
-    /** Longitudine (coordinate geografiche). */
-    private double longitudine;
-
-    /** Prezzo medio per persona (in euro). */
-    private double prezzoMedio;
-
-    /** Indica se il ristorante offre servizio delivery. */
-    private boolean delivery;
-
-    /** Indica se il ristorante consente la prenotazione online. */
-    private boolean prenotazioneOnline;
-
-    /** Tipologia di cucina offerta (es. italiana, giapponese, ecc.). */
-    private String tipoCucina;
+    private String nome, nazione, citta, indirizzo, tipoCucina;
+    private double latitudine, longitudine, prezzoMedio;
+    private boolean delivery, prenotazioneOnline;
 
     /**
      * Costruttore vuoto, utile per lettura/scrittura su file
@@ -72,10 +44,8 @@ public class Ristorante {
      * @param tipoCucina tipologia di cucina offerta
      */
     public Ristorante(String nome, String nazione, String citta, String indirizzo,
-                      double latitudine, double longitudine,
-                      double prezzoMedio,
-                      boolean delivery, boolean prenotazioneOnline,
-                      String tipoCucina) {
+                      double latitudine, double longitudine, double prezzoMedio, boolean delivery,
+                      boolean prenotazioneOnline, String tipoCucina) {
 
         this.nome = nome;
         this.nazione = nazione;

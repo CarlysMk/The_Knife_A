@@ -1,7 +1,3 @@
-package com.The_Knife_A.utility;
-
-import java.util.Scanner;
-import com.The_Knife_A.models.Utente;
 /**************************************
  * Matricola    Cognome     Nome
  * 754320       Baracca     Filippo
@@ -9,6 +5,11 @@ import com.The_Knife_A.models.Utente;
  *
  * Sede: Como
  ***************************************/
+package com.The_Knife_A.utility;
+
+import java.util.Scanner;
+import com.The_Knife_A.models.Utente;
+
 /**
  * Gestisce le funzioni disponibili ai ristoratori.
  * <p>
@@ -17,7 +18,6 @@ import com.The_Knife_A.models.Utente;
  */
 public class GestioneRistoratore {
 
-    // menu principale ristoratore
 
     /**
      * Mostra il menù dedicato al ristoratore e gestisce le operazioni selezionate.

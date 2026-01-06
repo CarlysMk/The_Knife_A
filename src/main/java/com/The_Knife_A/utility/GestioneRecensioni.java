@@ -4,7 +4,7 @@
  * 753747       Masolo      Carlos
  *
  * Sede: Como
-***************************************/
+ ***************************************/
 
 package com.The_Knife_A.utility;
 
@@ -123,15 +123,8 @@ public class GestioneRecensioni {
                         String risposta      = (c.length > 5) ? c[5] : "";
                         String idRistoratore = (c.length > 6) ? c[6] : "";
 
-                        righe.add(
-                            c[0] + "," +
-                            idRistorante + "," +
-                            idUtente + "," +
-                            stelle + "," +
-                            commento + "," +
-                            risposta + "," +
-                            idRistoratore
-                        );
+                        righe.add(c[0] + "," + idRistorante + "," + idUtente + "," + stelle + "," + commento + "," +
+                            risposta + "," + idRistoratore);
 
                         aggiornata = true;
                     } else {
@@ -140,15 +133,8 @@ public class GestioneRecensioni {
                 }
 
                 if (!aggiornata) {
-                    righe.add(
-                        idRec + "," +
-                        idRistorante + "," +
-                        idUtente + "," +
-                        stelle + "," +
-                        commento + "," +
-                        "" + "," +
-                        ""
-                    );
+                    righe.add(idRec + "," + idRistorante + "," + idUtente + "," + stelle + "," + commento + "," +
+                        "" + "," + "");
                 }
             }
 
@@ -212,10 +198,9 @@ public class GestioneRecensioni {
             }
 
             if (idRistorante == null) {
-                System.out.println("Ristorante non trovato tra i tuoi.");
+                System.out.println("Ristorante non trovato tra i tuoi");
                 return;
             }
-            // CARICA RECENSIONI DI QUEL RISTORANTE
             java.util.List<String[]> candidati = new java.util.ArrayList<>();
 
             try (BufferedReader br = new BufferedReader(new FileReader(FILE_RECENSIONI))) {
@@ -248,14 +233,8 @@ public class GestioneRecensioni {
                 int idUtente = Integer.parseInt(c[2]);
                 String username = getUsernameById(idUtente);
 
-                System.out.println(
-                    "#" + c[0] +
-                    " | Utente: " + username +
-                    " | Stelle: " + c[3] +
-                    "\nCommento: " + c[4] +
-                    (c[5].isBlank() ? "" : ("\nRisposta: " + c[5])) +
-                    "\n"
-                );
+                System.out.println("#" + c[0] + " | Utente: " + username + " | Stelle: " + c[3] +
+                        "\nCommento: " + c[4] + (c[5].isBlank() ? "" : ("\nRisposta: " + c[5])) + "\n");
             }
 
             System.out.print("Scrivi il numero della recensione a cui vuoi rispondere: ");
@@ -286,15 +265,8 @@ public class GestioneRecensioni {
                         System.out.print("Scrivi risposta: ");
                         String risposta = sc.nextLine();
 
-                        righe.add(
-                            c[0] + "," +
-                            c[1] + "," +
-                            c[2] + "," +
-                            c[3] + "," +
-                            c[4] + "," +
-                            risposta + "," +
-                            idRistoratore
-                        );
+                        righe.add(c[0] + "," + c[1] + "," + c[2] + "," + c[3] + "," + c[4] + "," + risposta + "," +
+                            idRistoratore);
 
                         continue;
                     }

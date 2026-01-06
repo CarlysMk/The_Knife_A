@@ -4,7 +4,7 @@
  * 753747       Masolo      Carlos
  *
  * Sede: Como
-***************************************/
+ ***************************************/
 
 package com.The_Knife_A.utility;
 
@@ -24,7 +24,6 @@ public class GestionePreferiti {
 
     private static final String FILE_PREFERITI = "data/Preferiti.csv";
 
-    // CREA LA RIGA VUOTA PER UN NUOVO UTENTE
 
     /**
      * Inizializza la riga dei preferiti per un nuovo utente.
@@ -35,17 +34,13 @@ public class GestionePreferiti {
 
         try (FileWriter fw = new FileWriter(FILE_PREFERITI, true)) {
 
-            // formato: idutente,
             fw.write(idUtente + ",\n");
-
-            System.out.println("Preferiti inizializzati per utente ID: " + idUtente);
 
         } catch (Exception e) {
             System.out.println("Errore creazione riga preferiti.");
         }
     }
 
-    // AGGIUNGE UN RISTORANTE AI PREFERITI
 
     /**
      * Aggiunge un ristorante ai preferiti dell'utente.
@@ -71,7 +66,6 @@ public class GestionePreferiti {
 
                     String[] c = riga.split(",", -1);
 
-                    // salta intestazione
                     if (c[0].equalsIgnoreCase("idutente")) {
                         righe.add(riga);
                         continue;
@@ -81,7 +75,6 @@ public class GestionePreferiti {
 
                     if (idUtenteFile == idUtente) {
 
-                        // controllo se esiste già
                         boolean giaPresente = false;
 
                         for (int i = 1; i < c.length; i++) {
@@ -96,7 +89,6 @@ public class GestionePreferiti {
                             System.out.println("Questo ristorante è già tra i preferiti.");
                             righe.add(riga);
                         } else {
-                            // aggiungo in fondo
                             riga = riga + idRistorante + ",";
                             righe.add(riga);
                             System.out.println("Ristorante aggiunto ai preferiti!");
@@ -109,13 +101,12 @@ public class GestionePreferiti {
                 }
             }
 
-            // Nessuna riga trovata → ne creo una nuova
+            // Nessuna riga trovata -> ne creo una nuova
             if (!aggiornata) {
                 righe.add(idUtente + "," + idRistorante + ",");
                 System.out.println("Creato elenco preferiti e aggiunto il ristorante.");
             }
 
-            // riscrive file
             try (FileWriter fw = new FileWriter(FILE_PREFERITI)) {
                 for (String l : righe) fw.write(l + "\n");
             }
@@ -125,7 +116,6 @@ public class GestionePreferiti {
         }
     }
 
-    // MOSTRA I PREFERITI DI UN UTENTE
 
     /**
      * Mostra l'elenco dei ristoranti preferiti dell'utente.
