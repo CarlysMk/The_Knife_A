@@ -1,3 +1,11 @@
+/**************************************
+ * Matricola    Cognome     Nome
+ * 754320       Baracca     Filippo
+ * 753747       Masolo      Carlos
+ *
+ * Sede: Como
+***************************************/
+
 package com.The_Knife_A.utility;
 
 import java.io.BufferedReader;
@@ -6,11 +14,23 @@ import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Gestisce la lista dei ristoranti preferiti degli utenti.
+ * <p>
+ * I preferiti sono memorizzati in un file CSV dove ogni riga
+ * rappresenta un utente e contiene l'elenco dei ristoranti salvati.
+ */
 public class GestionePreferiti {
 
     private static final String FILE_PREFERITI = "data/Preferiti.csv";
 
     // CREA LA RIGA VUOTA PER UN NUOVO UTENTE
+
+    /**
+     * Inizializza la riga dei preferiti per un nuovo utente.
+     * <p>
+     * Crea una riga vuota nel file dei preferiti associata all'id utente.
+     */
     public static void inizializzaPreferitiPerUtente(int idUtente) {
 
         try (FileWriter fw = new FileWriter(FILE_PREFERITI, true)) {
@@ -26,6 +46,12 @@ public class GestionePreferiti {
     }
 
     // AGGIUNGE UN RISTORANTE AI PREFERITI
+
+    /**
+     * Aggiunge un ristorante ai preferiti dell'utente.
+     * <p>
+     * Se il ristorante è già presente, l'operazione viene ignorata.
+     */
     public static void aggiungiPreferito(int idUtente, int idRistorante) {
 
         try {
@@ -100,6 +126,10 @@ public class GestionePreferiti {
     }
 
     // MOSTRA I PREFERITI DI UN UTENTE
+
+    /**
+     * Mostra l'elenco dei ristoranti preferiti dell'utente.
+     */
     public static void mostraPreferiti(int idUtente) {
 
         try (BufferedReader br = new BufferedReader(new FileReader(FILE_PREFERITI))) {
@@ -143,10 +173,15 @@ public class GestionePreferiti {
             System.out.println("Errore lettura preferiti: " + e.getMessage());
         }
     }
-     private static String getNomeRistorante(int idRistorante) {
+
+    /**
+     * Restituisce il nome del ristorante dato il suo id.
+     * <p>
+     * La ricerca avviene nel file dei ristoranti.
+     */
+    private static String getNomeRistorante(int idRistorante) {
 
         try (BufferedReader br = new BufferedReader(new FileReader("data/Ristoranti.csv"))) {
-
 
             String riga;
 
@@ -168,4 +203,3 @@ public class GestionePreferiti {
         return "Ristorante sconosciuto";
     }
 }
-
