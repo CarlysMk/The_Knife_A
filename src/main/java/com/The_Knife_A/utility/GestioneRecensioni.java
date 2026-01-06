@@ -1,3 +1,11 @@
+/**************************************
+ * Matricola    Cognome     Nome
+ * 754320       Baracca     Filippo
+ * 753747       Masolo      Carlos
+ *
+ * Sede: Como
+***************************************/
+
 package com.The_Knife_A.utility;
 
 import java.io.BufferedReader;
@@ -5,10 +13,19 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.util.Scanner;
 
+/**
+ * Gestisce la creazione, visualizzazione e risposta alle recensioni.
+ * <p>
+ * Le recensioni vengono salvate in un file CSV e possono essere
+ * inserite dagli utenti oppure visualizzate/gestite dai ristoratori.
+ */
 public class GestioneRecensioni {
 
     private static final String FILE_RECENSIONI = "data/Recensioni.csv";
 
+    /**
+     * Calcola il prossimo id disponibile leggendo il file recensioni.
+     */
     private static int getNextId() {
         int lastId = 0;
 
@@ -32,6 +49,9 @@ public class GestioneRecensioni {
 
     //  RECUPERA USERNAME DA ID
 
+    /**
+     * Restituisce l'username di un utente usando il suo id.
+     */
     private static String getUsernameById(int idUtente) {
 
         try (BufferedReader br = new BufferedReader(new FileReader("data/Utenti.csv"))) {
@@ -57,6 +77,10 @@ public class GestioneRecensioni {
 
     //  UTENTE: LASCIA/AGGIORNA RECENSIONE
 
+    /**
+     * Permette all'utente di lasciare o aggiornare una recensione
+     * per un determinato ristorante.
+     */
     public static void lasciaRecensione(Scanner sc, int idRistorante, int idUtente) {
 
         try {
@@ -135,9 +159,12 @@ public class GestioneRecensioni {
         }
     }
 
-
     //  RISTORATORE: VISUALIZZA & RISPONDE
 
+    /**
+     * Consente al ristoratore di visualizzare le recensioni
+     * dei propri ristoranti e inserire una risposta.
+     */
     public static void rispondiRecensioni(Scanner sc, int idRistoratore) {
 
         try {
