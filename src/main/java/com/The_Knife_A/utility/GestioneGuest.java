@@ -45,7 +45,7 @@ public class GestioneGuest {
             switch (scelta) {
 
                 case 1:
-                    System.out.println("Ricerca ristoranti");
+                    cercaTrePiuViciniGuest(sc);
                     break;
 
                 case 0:
@@ -57,5 +57,27 @@ public class GestioneGuest {
             }
 
         } while (scelta != 0);
+    }
+
+    /**
+     * Mostra i tre ristoranti più vicini al luogo indicato dall'utente.
+     * <p>
+     * Il metodo richiama la funzione di ricerca della classe
+     * {@link GestioneRistoranti} in modalità sola lettura.
+     * <p>
+     * È utilizzato esclusivamente nell'area guest e non consente
+     * ulteriori operazioni sui risultati ottenuti.
+     *
+     * @param sc scanner utilizzato per acquisire i dati inseriti dall'utente
+     */
+    private static void cercaTrePiuViciniGuest(Scanner sc) {
+
+        try {
+            System.out.println("\nModalità ospite: puoi solo visualizzare i ristoranti.");
+            GestioneRistoranti.cercaTrePiuVicini(sc, null);
+
+        } catch (Exception e) {
+            System.out.println("Errore durante la ricerca in modalità guest.");
+        }
     }
 }
