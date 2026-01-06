@@ -1,5 +1,13 @@
 package com.The_Knife_A.models;
 
+
+/**************************************
+ * Matricola    Cognome     Nome
+ * 754320       Baracca     Filippo
+ * 753747      Masolo      Carlos
+ *              
+ * Sede: Como
+***************************************/
 /**
  * Rappresenta un ristorante presente nella piattaforma TheKnife.
  * <p>
@@ -7,8 +15,6 @@ package com.The_Knife_A.models;
  * geografiche (latitudine e longitudine), economiche (prezzo medio)
  * e funzionali (disponibilità di delivery e prenotazione online),
  * oltre al tipo di cucina offerto.
- *
- * @author <NOME COGNOME — matricola>
  */
 public class Ristorante {
 
