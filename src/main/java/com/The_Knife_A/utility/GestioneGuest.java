@@ -2,7 +2,6 @@ package com.The_Knife_A.utility;
 
 import java.util.Scanner;
 
-
 /**************************************
  * Matricola    Cognome     Nome
  * 754320       Baracca     Filippo
@@ -10,6 +9,7 @@ import java.util.Scanner;
  *
  * Sede: Como
  ***************************************/
+
 /**
  * Gestisce l’area dedicata agli utenti guest (non registrati).
  * <p>

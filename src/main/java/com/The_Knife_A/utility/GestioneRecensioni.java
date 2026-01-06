@@ -14,19 +14,27 @@ import java.io.FileWriter;
 import java.util.Scanner;
 
 /**
- * Gestisce la creazione, visualizzazione e risposta alle recensioni.
+ * Gestisce tutte le operazioni relative alle recensioni dei ristoranti.
  * <p>
- * Le recensioni vengono salvate in un file CSV e possono essere
- * inserite dagli utenti oppure visualizzate/gestite dai ristoratori.
+ * Le recensioni sono salvate in un file CSV e includono:
+ * id recensione, id ristorante, id autore, valutazione,
+ * commento ed eventuale risposta del ristoratore.
+ * <p>
+ * La classe permette sia:
+ * <ul>
+ *     <li>inserimento/aggiornamento recensione (utente)</li>
+ *     <li>visualizzazione e risposta (ristoratore)</li>
+ * </ul>
  */
 public class GestioneRecensioni {
 
     private static final String FILE_RECENSIONI = "data/Recensioni.csv";
 
     /**
-     * Calcola il prossimo id disponibile leggendo il file recensioni.
+     * Restituisce il prossimo id disponibile leggendo il file.
      */
     private static int getNextId() {
+
         int lastId = 0;
 
         try (BufferedReader br = new BufferedReader(new FileReader(FILE_RECENSIONI))) {
@@ -47,10 +55,8 @@ public class GestioneRecensioni {
         return lastId + 1;
     }
 
-    //  RECUPERA USERNAME DA ID
-
     /**
-     * Restituisce l'username di un utente usando il suo id.
+     * Recupera l'username partendo dall'id utente.
      */
     private static String getUsernameById(int idUtente) {
 
@@ -75,11 +81,9 @@ public class GestioneRecensioni {
         return "Utente sconosciuto";
     }
 
-    //  UTENTE: LASCIA/AGGIORNA RECENSIONE
-
     /**
-     * Permette all'utente di lasciare o aggiornare una recensione
-     * per un determinato ristorante.
+     * L'utente inserisce o aggiorna la recensione di un ristorante.
+     * Se esiste già, viene sovrascritta mantenendo eventuale risposta.
      */
     public static void lasciaRecensione(Scanner sc, int idRistorante, int idUtente) {
 
@@ -159,17 +163,14 @@ public class GestioneRecensioni {
         }
     }
 
-    //  RISTORATORE: VISUALIZZA & RISPONDE
-
     /**
-     * Consente al ristoratore di visualizzare le recensioni
-     * dei propri ristoranti e inserire una risposta.
+     * Il ristoratore vede tutte le recensioni dei propri locali
+     * e può inserire una risposta visibile agli utenti.
      */
     public static void rispondiRecensioni(Scanner sc, int idRistoratore) {
 
         try {
 
-            // MOSTRA RISTORANTI DEL RISTORATORE
             System.out.println("\nI TUOI RISTORANTI:");
 
             java.util.List<String[]> mieiRistoranti = new java.util.ArrayList<>();
@@ -214,7 +215,6 @@ public class GestioneRecensioni {
                 System.out.println("Ristorante non trovato tra i tuoi.");
                 return;
             }
-
             // CARICA RECENSIONI DI QUEL RISTORANTE
             java.util.List<String[]> candidati = new java.util.ArrayList<>();
 

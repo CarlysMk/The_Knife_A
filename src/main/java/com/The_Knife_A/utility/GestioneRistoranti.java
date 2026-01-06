@@ -9,12 +9,21 @@ import java.util.Scanner;
 import com.The_Knife_A.models.Ristorante;
 import com.The_Knife_A.models.Utente;
 
+/**
+ * Gestisce le operazioni relative ai ristoranti:
+ * creazione, ricerca e visualizzazione delle informazioni.
+ * <p>
+ * I dati vengono salvati e letti da file CSV.
+ */
 public class GestioneRistoranti {
 
     private static final String FILE_RISTORANTI = "data/Ristoranti.csv";
 
-    // legge l'ultimo ID e restituisce il prossimo
+    /**
+     * Restituisce il prossimo id disponibile leggendo l'ultimo presente nel file.
+     */
     private static int getNextId() {
+
         int ultimoId = 0;
 
         try (BufferedReader br = new BufferedReader(new FileReader(FILE_RISTORANTI))) {
@@ -37,7 +46,10 @@ public class GestioneRistoranti {
         return ultimoId + 1;
     }
 
-    // aggiunge un nuovo ristorante
+    /**
+     * Permette al ristoratore di inserire un nuovo ristorante
+     * e salvarlo nel file CSV.
+     */
     public static void aggiungiRistorante(Utente proprietario) {
 
         Scanner scanner = new Scanner(System.in);
@@ -75,11 +87,11 @@ public class GestioneRistoranti {
         int id = getNextId();
 
         Ristorante r = new Ristorante(
-                nome, nazione, citta, indirizzo,
-                latitudine, longitudine,
-                prezzoMedio,
-                delivery, prenotazioneOnline,
-                tipoCucina
+            nome, nazione, citta, indirizzo,
+            latitudine, longitudine,
+            prezzoMedio,
+            delivery, prenotazioneOnline,
+            tipoCucina
         );
 
         try (FileWriter fw = new FileWriter(FILE_RISTORANTI, true)) {
@@ -106,7 +118,9 @@ public class GestioneRistoranti {
         }
     }
 
-    // recupera username partendo da id utente (per mostrare nelle recensioni)
+    /**
+     * Restituisce l'username associato a un id utente.
+     */
     public static String getUsernameById(int idUtente) {
 
         try (BufferedReader br = new BufferedReader(new FileReader("data/Utenti.csv"))) {
@@ -122,7 +136,7 @@ public class GestioneRistoranti {
                 if (c[0].equalsIgnoreCase("id")) continue;
 
                 if (Integer.parseInt(c[0]) == idUtente) {
-                    return c[1];   // username
+                    return c[1];
                 }
             }
 
@@ -131,7 +145,13 @@ public class GestioneRistoranti {
         return "Utente sconosciuto";
     }
 
-    // cerca i tre ristoranti più vicini e permette di vedere i dettagli
+    /**
+     * Cerca e mostra i tre ristoranti più vicini rispetto
+     * alle coordinate inserite dall'utente.
+     * <p>
+     * Permette inoltre di visualizzare la scheda dettagliata,
+     * aggiungere ai preferiti o lasciare una recensione.
+     */
     public static void cercaTrePiuVicini(Scanner sc, Utente utenteLoggato) {
 
         try {
@@ -290,31 +310,29 @@ public class GestioneRistoranti {
 
             if (utenteLoggato == null) {
                 System.out.println("\n0. Torna indietro");
-                
-            } else {
-        System.out.println(
-            "\n1. Aggiungi ai preferiti" +
-            "\n2. Lascia una recensione" +
-            "\n0. Torna indietro" +
-            "\nScegli: "
-        );
-}
 
+            } else {
+                System.out.println(
+                    "\n1. Aggiungi ai preferiti" +
+                    "\n2. Lascia una recensione" +
+                    "\n0. Torna indietro" +
+                    "\nScegli: "
+                );
+            }
 
             int azione = Integer.parseInt(sc.nextLine());
+
             if (utenteLoggato == null) {
                 return;
-            } 
-            else {
+            } else {
                 switch (azione) {
 
                     case 1:
                         GestionePreferiti.aggiungiPreferito(
                             utenteLoggato.getId(),
                             idSelezionato
-                    );
+                        );
                         break;
-
 
                     case 2:
                         GestioneRecensioni.lasciaRecensione(
@@ -328,6 +346,7 @@ public class GestioneRistoranti {
                         return;
                 }
             }
+
         } catch (Exception e) {
             System.out.println("Errore nella ricerca: " + e.getMessage());
         }
